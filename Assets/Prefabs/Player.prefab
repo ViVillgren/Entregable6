@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1242410267751775709}
   - component: {fileID: 870315685}
   - component: {fileID: 870315689}
+  - component: {fileID: 3374709567815008862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -97,7 +98,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &870315689
 MonoBehaviour:
@@ -111,6 +112,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ced1371a4197964d9e1f1181b23acaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 500
-  gravityModifier: 1
-  gameOver: 0
+  jumpClip: {fileID: 0}
+  explosionClip: {fileID: 0}
+  explosionParticleSystem: {fileID: 0}
+--- !u!65 &3374709567815008862
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254969024778041369}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46895948, y: 0.72688437, z: 0.49309254}
+  m_Center: {x: 0, y: 0.56069183, z: -0.000000029802322}

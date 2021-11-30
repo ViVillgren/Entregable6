@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     private AudioSource cameraAudioSource;
     private float jumpForce = 5f;
     private float gravityModifier = 1f;
+    private float gravityZero = 0;
     private float yLim = 14f;
-    private bool gameOver;
+    public bool gameOver;
     private float groundLim = 0f;
     public AudioClip jumpClip;
     public AudioClip explosionClip;
     public ParticleSystem explosionParticleSystem;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,23 +45,30 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y < groundLim)
         {
+           
             Debug.Log($"GAME OVER");
+            cameraAudioSource.Stop();
             Time.timeScale = 0;
         }
     }
-    private void OnCollisionEnter(Collision onCollider)
+    private void OnCollisionEnter(Collision otherCollider)
     {
         if (!gameOver)
         {
-            Debug.Log(message: "GAME OVER");
+            Instantiate(explosionParticleSystem, transform.position, explosionParticleSystem.transform.rotation);
+            playerAudioSource.PlayOneShot(explosionClip, 1f);
 
-            //Activa la explosion
-            explosionParticleSystem.Play();
-            playerAudioSource.PlayOneShot(explosionClip, 1);
             cameraAudioSource.Stop();
+
+            Physics.gravity *= gravityZero;
+
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
 
             gameOver = true;
+            Debug.Log(message: "GAME OVER");
         }
 
 
